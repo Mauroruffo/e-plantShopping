@@ -17,6 +17,7 @@ export const CartSlice = createSlice({
             state.items.push({name, image, cost, quantity: 1});
         }
         console.log('Finished');
+        console.log(state.items.length);
     },
     removeItem: (state, action) => {
         state.items = state.items.filter(item => item.name !== action.payload)
@@ -29,9 +30,14 @@ export const CartSlice = createSlice({
         }
     
     },
+    getItemQuantity: (state, action) => {
+        let totalItems = state.items.length;
+        console.log(totalItems);
+        action.payload = totalItems;
+    }
   },
 });
 
-export const { addItem, removeItem, updateQuantity } = CartSlice.actions;
+export const { addItem, removeItem, updateQuantity, getItemQuantity } = CartSlice.actions;
 
 export default CartSlice.reducer;
