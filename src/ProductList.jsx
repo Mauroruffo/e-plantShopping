@@ -266,14 +266,22 @@ function ProductList({ onHomeClick }) {
     };
 
     const handleAddToCart = (product) => {
-        console.log('Start handle');
-        console.log(product);
-        dispatch(addItem(product));
-        setAddedToCart((prevState) => ({
-            ...prevState,
-            [product.name]: true,
-        }))
-        console.log('Finish handle');
+        if (!addedToCart[product.name])
+        {
+            console.log('Start handle');
+            console.log(product);
+            dispatch(addItem(product));
+            setAddedToCart((prevState) => ({
+                ...prevState,
+                [product.name]: true,
+            }))
+            console.log('Finish handle');
+            console.log(product.name);
+            console.log(addedToCart);
+        }
+        else{
+            console.log('Already In Cart!')
+        }
     }
 
     const handleTotalItems = () => {
@@ -314,7 +322,7 @@ function ProductList({ onHomeClick }) {
                                         <div className='product-title'>{plant.name}</div>
                                         <div className='product-title'>{plant.description}</div>
                                         <div className='product-title'>{plant.cost}</div>
-                                        <button className='product-button' onClick={() => handleAddToCart(plant)}>Add to Cart</button>
+                                        <button className='product-button' onClick={() => handleAddToCart(plant)} disabled={false}>Add to Cart</button>
                                     </div>
                                 ))}
                             </div>
