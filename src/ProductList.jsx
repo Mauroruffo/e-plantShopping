@@ -10,6 +10,7 @@ function ProductList({ onHomeClick }) {
     const [showPlants, setShowPlants] = useState(false); // State to control the visibility of the About Us page
     const [addedToCart, setAddedToCart] = useState({});
     const dispatch = useDispatch();
+    const cart = useSelector(state => state.cart.items);
 
     useEffect(()=>{
 
@@ -266,7 +267,15 @@ function ProductList({ onHomeClick }) {
     };
 
     const handleAddToCart = (product) => {
-        if (!addedToCart[product.name])
+        var inCart = false;
+        cart.forEach(element => {
+            if (element.name == product.name)
+            {
+                inCart = true;
+            }
+            // console.log(element);
+        });
+        if (!inCart)
         {
             console.log('Start handle');
             console.log(product);
@@ -278,6 +287,9 @@ function ProductList({ onHomeClick }) {
             console.log('Finish handle');
             console.log(product.name);
             console.log(addedToCart);
+            cart.forEach(element => {
+                console.log(element.name);
+            });
         }
         else{
             console.log('Already In Cart!')
